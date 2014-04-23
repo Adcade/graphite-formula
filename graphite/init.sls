@@ -107,6 +107,14 @@ local-dirs:
       admin_user: {{ graphite.admin_user }}
       admin_password: {{ graphite.admin_password }}
 
+{{ graphite.prefix }}/webapp/graphite/graphite.wsgi:
+  file.managed:
+    - source: salt://graphite/files/graphite.wsgi
+    - user: graphite
+    - group: graphite
+    - mode: 644
+    - template: jinja
+
 /opt/graphite/conf/storage-schemas.conf:
   file.managed:
     - source: salt://graphite/files/storage-schemas.conf
