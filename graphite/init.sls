@@ -1,6 +1,6 @@
 include:
   - graphite.supervisor
-  - graphite.graph-explorer
+  - graphite.graph_explorer
 
 {%- if 'monitor_master' in salt['grains.get']('roles', []) %}
 
