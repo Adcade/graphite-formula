@@ -163,6 +163,6 @@ nginx:
     - enable: True
     - reload: True
     - watch:
-      - file: /etc/nginx/conf.d/graphite.conf
+      - file: graphite_nginx_config
 
 {%- endif %}
