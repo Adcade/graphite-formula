@@ -146,8 +146,13 @@ restart-supervisor-for-graphite:
     - watch:
       - file: /etc/supervisor/conf.d/graphite.conf
 
-/etc/nginx/conf.d/graphite.conf:
+graphite_nginx_config:
   file.managed:
+{%- if grains['os_family'] == 'Debian' %}
+    - name: /etc/nginx/sites-enabled/graphite.conf
+{%- elif grains['os_family'] == 'RedHat' %}
+    - name: /etc/nginx/conf.d/graphite.conf
+{%- endif %}
     - source: salt://graphite/files/graphite.conf.nginx
     - template: jinja
     - context:
