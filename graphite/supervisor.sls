@@ -30,12 +30,24 @@ supervisor:
         [supervisorctl]
         serverurl=unix:///var/run//supervisor.sock
 
+        [unix_http_server]
+        file = /var/run/supervisor.sock
+        chmod = 0777
+        chown= nobody:nogroup
 
+{%- if grains['os_family'] == 'Debian' %}
+/etc/init/supervisord:
+  file.managed:
+    - source: salt://graphite/files/supervisor/supervisor_upstart.conf
+    - mode:  644
+    - template: jinja
+{%- elif grains['os_family'] == 'RedHat' %}
 /etc/init.d/supervisord:
   file.managed:
     - source: salt://graphite/files/supervisor/supervisor.init
     - mode: 755
     - template: jinja
+{% endif %}
 
 supervisor-service:
   service:
