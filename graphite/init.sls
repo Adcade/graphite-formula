@@ -107,7 +107,7 @@ local-dirs:
       admin_user: {{ graphite.admin_user }}
       admin_password: {{ graphite.admin_password }}
 
-{{ graphite.prefix }}/webapp/graphite/graphite.wsgi:
+{{ graphite.prefix }}/webapp/graphite/graphite_wsgi.py:
   file.managed:
     - source: salt://graphite/files/graphite.wsgi
     - user: graphite
