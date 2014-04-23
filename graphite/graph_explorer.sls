@@ -2,6 +2,9 @@
 
 {% if graph_explorer %}
 
+include:
+  - graphite
+
 /opt/graph-explorer/.virtualenv:
   virtualenv.managed:
     - user: graphite
@@ -37,6 +40,8 @@ install_graph_explorer:
     - mode: 644
     - user: graphite
     - group: graphite
+    - require:
+      - user: graphite
 
 /opt/graph-explorer/graph-explorer.conf:
   file.managed:
@@ -44,5 +49,7 @@ install_graph_explorer:
     - mode: 644
     - user: graphite
     - group: graphite
+    - require:
+      - user: graphite
 
 {% endif %}
