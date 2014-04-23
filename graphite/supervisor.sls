@@ -36,7 +36,7 @@ supervisor:
         chown= nobody:nogroup
 
 {%- if grains['os_family'] == 'Debian' %}
-/etc/init/supervisord:
+/etc/init/supervisord.conf:
   file.managed:
     - source: salt://graphite/files/supervisor/supervisor_upstart.conf
     - mode:  644
@@ -51,11 +51,7 @@ supervisor:
 
 supervisor-service:
   service:
-{%- if grains['os_family'] == 'Debian' %}
-    - name: supervisor
-{%- elif grains['os_family'] == 'RedHat' %}
     - name: supervisord
-{%- endif %}
     - running
     - reload: True
     - enable: True
