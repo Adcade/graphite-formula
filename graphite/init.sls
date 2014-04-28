@@ -166,11 +166,4 @@ graphite_nginx_config:
     - context:
       graphite_host: {{ graphite.host }}
 
-nginx:
-  service.running:
-    - enable: True
-    - reload: True
-    - watch:
-      - file: graphite_nginx_config
-
 {%- endif %}
